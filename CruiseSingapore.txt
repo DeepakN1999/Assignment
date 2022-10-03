@@ -1,0 +1,106 @@
+Question 3 A :
+
+package org.topic;
+import java.util.*;
+public class Members 
+{
+	
+	int idno,age;
+	String name,tripname;
+	int ticketno;
+	int membertype;
+	String membertypes;
+	static int countcrew,countadult,countchild,countticket;
+	int fee;
+	
+	Scanner ob =new Scanner(System.in);
+	public Members()
+	{
+		System.out.println("Enter the idno");
+		this.idno=ob.nextInt();
+		System.out.println("Enter the name");
+		this.name=ob.next();
+		System.out.println("Enter the tripname");
+		this.tripname=ob.next();
+		System.out.println("Enter the age");
+		this.age=ob.nextInt();
+		
+		
+		if(age>10)
+		{
+			System.out.println("Enter 1 for Crew member or 2 for adult");
+			this.membertype=ob.nextInt();
+			
+			if(membertype==1)
+			{
+				this.membertypes="crew";
+				fee=0;
+				countcrew++;
+			}
+
+			else if(membertype==2)
+			{
+				this.membertypes="adult";
+				fee=500;
+				System.out.println("Enter the tickect no :");
+				this.ticketno=ob.nextInt();
+				countadult++;
+				countticket++;
+			}
+		}
+		else
+		{
+				this.membertypes="child";
+				fee=250;
+				System.out.println("Enter the tickect no :");
+				this.ticketno=ob.nextInt();
+				countchild++;
+				countticket++;
+		}
+	}
+		
+	public static String Countmembers()
+		{
+			return "no of crewmembers = " +countcrew+"\nNumber of Adults = "+countadult+"\nNumber of Children = "+countchild+ "\nno of ticket sold = " +countticket ; 
+			
+		}
+		
+		
+	
+	
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+package org.topic;
+import java.util.*;
+public class Cruisesingapore 
+{
+	public static void main(String[] args)
+	{	
+		Members ob;
+		Scanner sc =new Scanner(System.in);
+		
+		Map<Integer,Members> map=new HashMap<Integer,Members>();
+		
+		System.out.println("Enter the Number of people You want on the Cruise");
+		int num=sc.nextInt();
+	
+		for(int i=1;i<=num;i++)
+		{
+			map.put(i , new Members());
+		}
+		
+		for(Map.Entry<Integer, Members> entry:map.entrySet())
+		{
+			int key=entry.getKey();
+			Members c=entry.getValue();
+			System.out.println(key+" Data:");  
+            System.out.println("idno:" +c.idno + "\nName: " + c.name + "\nAge: " + c.age + "\ntripname:"+ c.tripname + "\nMember Type: " + c.membertypes+"\nFees: "+c.fee + "\nticketno : "+c.ticketno);
+		}
+		System.out.println(Members.Countmembers());
+		
+	}
+	
+	
+}
